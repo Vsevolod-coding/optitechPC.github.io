@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Заявка</title>
+<style>
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f5f5f5; /* Пастельный серый */
+    margin: 0;
+    padding: 0;
+    transition: background-color 0.3s ease; /* Плавное изменение цвета фона */
+}
+
+.container {
+    max-width: 400px;
+    margin: 50px auto;
+    background-color: #fff; /* Белый фон формы */
+    padding: 20px;
+    border-radius: 10px; /* Закругленные углы */
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* Тень */
+}
+
+.container h2 {
+    font-size: 36px;
+}
+
+h2 {
+    text-align: center;
+    color: #333; /* Темно-серый */
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    margin-bottom: 8px;
+    color: #666; /* Серый */
+}
+
+input[type="text"],
+input[type="tel"],
+input[type="email"],
+input[type="submit"] {
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc; /* Светло-серый */
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+input[type="submit"] {
+    background-color: #4CAF50; /* Зеленый */
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+input[type="submit"]:hover {
+    background-color: #45a049; /* Темно-зеленый при наведении */
+}
+
+.theme-toggle-wrapper {
+    text-align: center; /* Выравнивание по центру */
+    margin-top: 20px; /* Отступ сверху */
+}
+
+.theme-toggle {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 36px; /* Увеличенный размер */
+    color: #666; /* Серый */
+}
+</style>
+<script>
+function togglePlaceholder(input) {
+    if (input.value.trim() === '') {
+        input.placeholder = "+7 (920) 123 12 12"; // Показываем подсказку, если поле пустое
+    } else {
+        input.placeholder = ''; // Убираем подсказку, если поле не пустое
+    }
+}
+
+function toggleTheme(button) {
+    var body = document.body;
+    if (body.style.backgroundColor === "rgb(245, 245, 245)") {
+        body.style.backgroundColor = "#222"; /* Черный фон */
+        button.innerHTML = '<span style="font-size: 36px;">🌙</span>'; // Луна
+    } else {
+        body.style.backgroundColor = "#f5f5f5"; /* Серый фон */
+        button.innerHTML = '<span style="font-size: 36px;">🌞</span>'; // Солнце
+    }
+}
+</script>
+</head>
+<body>
+
+<div class="container">
+    <h2>Оставьте заявку</h2>
+
+    <form action="/submit_registration" method="POST">
+        <label for="name">Имя:</label>
+        <input type="text" id="name" name="name" required>
+
+        <label for="phone">Номер телефона:</label>
+        <input type="tel" id="phone" name="phone" oninput="togglePlaceholder(this)" placeholder="+7 (920) 123 12 12" required>
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
+
+        <input type="submit" value="РЕГИСТРАЦИЯ">
+    </form>
+
+    <div class="theme-toggle-wrapper">
+        <button class="theme-toggle" onclick="toggleTheme(this)"><span style="font-size: 36px;">🌞</span></button>
+    </div>
+</div>
+
+</body>
+</html>
